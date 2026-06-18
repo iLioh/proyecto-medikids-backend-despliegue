@@ -1,0 +1,2035 @@
+{
+  "services": [
+    {
+      "class": "AdminConfigService",
+      "path": "process\\service\\AdminConfigService.java",
+      "methods": [
+        {
+          "signature": "public void init()",
+          "name": "init",
+          "returnType": "void",
+          "params": ""
+        },
+        {
+          "signature": "public String getSecretPath()",
+          "name": "getSecretPath",
+          "returnType": "String",
+          "params": ""
+        },
+        {
+          "signature": "public boolean validateHash(String hash)",
+          "name": "validateHash",
+          "returnType": "boolean",
+          "params": "String hash"
+        }
+      ],
+      "dependencies": [
+        "AdminConfigRepository"
+      ]
+    },
+    {
+      "class": "AuditService",
+      "path": "process\\service\\AuditService.java",
+      "methods": [
+        {
+          "signature": "public void registrarIntento(String email, String ip, boolean exitoso, String tipo)",
+          "name": "registrarIntento",
+          "returnType": "void",
+          "params": "String email, String ip, boolean exitoso, String tipo"
+        },
+        {
+          "signature": "public List<IntentoLogin> obtenerUltimos50()",
+          "name": "obtenerUltimos50",
+          "returnType": "List<IntentoLogin>",
+          "params": ""
+        },
+        {
+          "signature": "public List<IntentoLogin> obtenerPorTipo(String tipo)",
+          "name": "obtenerPorTipo",
+          "returnType": "List<IntentoLogin>",
+          "params": "String tipo"
+        }
+      ],
+      "dependencies": [
+        "IntentoLoginRepository"
+      ]
+    },
+    {
+      "class": "AuthService",
+      "path": "process\\service\\AuthService.java",
+      "methods": [
+        {
+          "signature": "public AuthResponse login(String email, String password, HttpServletRequest httpRequest)",
+          "name": "login",
+          "returnType": "AuthResponse",
+          "params": "String email, String password, HttpServletRequest httpRequest"
+        },
+        {
+          "signature": "public AuthResponse adminLogin(String email, String password, HttpServletRequest httpRequest)",
+          "name": "adminLogin",
+          "returnType": "AuthResponse",
+          "params": "String email, String password, HttpServletRequest httpRequest"
+        },
+        {
+          "signature": "public AuthResponse login(String email, String password)",
+          "name": "login",
+          "returnType": "AuthResponse",
+          "params": "String email, String password"
+        },
+        {
+          "signature": "public AuthResponse verify2FA(String email, String code)",
+          "name": "verify2FA",
+          "returnType": "AuthResponse",
+          "params": "String email, String code"
+        },
+        {
+          "signature": "public AuthResponse resend2FA(String email)",
+          "name": "resend2FA",
+          "returnType": "AuthResponse",
+          "params": "String email"
+        },
+        {
+          "signature": "public AuthResponse refreshToken(String refreshTokenValue, HttpServletRequest httpRequest)",
+          "name": "refreshToken",
+          "returnType": "AuthResponse",
+          "params": "String refreshTokenValue, HttpServletRequest httpRequest"
+        },
+        {
+          "signature": "public boolean logout(String refreshTokenValue)",
+          "name": "logout",
+          "returnType": "boolean",
+          "params": "String refreshTokenValue"
+        }
+      ],
+      "dependencies": [
+        "AuditService",
+        "EmailService",
+        "IpAutorizadaService",
+        "JwtService",
+        "PasswordEncoder",
+        "RefreshTokenService",
+        "UsuarioRepository",
+        "long"
+      ]
+    },
+    {
+      "class": "CitaService",
+      "path": "process\\service\\CitaService.java",
+      "methods": [
+        {
+          "signature": "public List<CitaDto> getAll()",
+          "name": "getAll",
+          "returnType": "List<CitaDto>",
+          "params": ""
+        },
+        {
+          "signature": "public CitaDto getById(int id)",
+          "name": "getById",
+          "returnType": "CitaDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public CitaDto save(CitaRequest cita)",
+          "name": "save",
+          "returnType": "CitaDto",
+          "params": "CitaRequest cita"
+        },
+        {
+          "signature": "public CitaDto update(int id, CitaRequest cita)",
+          "name": "update",
+          "returnType": "CitaDto",
+          "params": "int id, CitaRequest cita"
+        },
+        {
+          "signature": "public List<CitaDto> getByPaciente(int id_paciente)",
+          "name": "getByPaciente",
+          "returnType": "List<CitaDto>",
+          "params": "int id_paciente"
+        },
+        {
+          "signature": "public List<CitaDto> getByCliente(int idCliente)",
+          "name": "getByCliente",
+          "returnType": "List<CitaDto>",
+          "params": "int idCliente"
+        },
+        {
+          "signature": "public List<CitaDto> getByMedico(int idMedico)",
+          "name": "getByMedico",
+          "returnType": "List<CitaDto>",
+          "params": "int idMedico"
+        },
+        {
+          "signature": "public List<Integer> getCitaIdsByCliente(int idCliente)",
+          "name": "getCitaIdsByCliente",
+          "returnType": "List<Integer>",
+          "params": "int idCliente"
+        },
+        {
+          "signature": "public CitaDto marcarAsistencia(int id, Character asistencia)",
+          "name": "marcarAsistencia",
+          "returnType": "CitaDto",
+          "params": "int id, Character asistencia"
+        }
+      ],
+      "dependencies": [
+        "CitaRepository",
+        "ClienteRepository",
+        "EmailService",
+        "EspecialidadRepository",
+        "HorarioRepository",
+        "MedicoRepository",
+        "PacienteRepository",
+        "PagoRepository",
+        "PdfService",
+        "UsuarioRepository"
+      ]
+    },
+    {
+      "class": "ClienteService",
+      "path": "process\\service\\ClienteService.java",
+      "methods": [
+        {
+          "signature": "public List<ClienteDto> getAll()",
+          "name": "getAll",
+          "returnType": "List<ClienteDto>",
+          "params": ""
+        },
+        {
+          "signature": "public ClienteDto getById(int id)",
+          "name": "getById",
+          "returnType": "ClienteDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public ClienteDto getByIdUsuario(int idUsuario)",
+          "name": "getByIdUsuario",
+          "returnType": "ClienteDto",
+          "params": "int idUsuario"
+        },
+        {
+          "signature": "public ClienteDto save(ClienteRequest cliente)",
+          "name": "save",
+          "returnType": "ClienteDto",
+          "params": "ClienteRequest cliente"
+        },
+        {
+          "signature": "public ClienteDto update(int id, ClienteRequest cliente)",
+          "name": "update",
+          "returnType": "ClienteDto",
+          "params": "int id, ClienteRequest cliente"
+        },
+        {
+          "signature": "public ClienteDto getByDni(String dni)",
+          "name": "getByDni",
+          "returnType": "ClienteDto",
+          "params": "String dni"
+        },
+        {
+          "signature": "public List<ClienteDto> getByNombre(String nombre)",
+          "name": "getByNombre",
+          "returnType": "List<ClienteDto>",
+          "params": "String nombre"
+        }
+      ],
+      "dependencies": [
+        "ClienteRepository",
+        "UsuarioRepository"
+      ]
+    },
+    {
+      "class": "EmailService",
+      "path": "process\\service\\EmailService.java",
+      "methods": [
+        {
+          "signature": "public void enviarCodigo2FA(String destinatario, String codigo)",
+          "name": "enviarCodigo2FA",
+          "returnType": "void",
+          "params": "String destinatario, String codigo"
+        },
+        {
+          "signature": "public void enviarConfirmacionCita(String destinatario, String nombrePaciente, String nombreMedico,\n                                       String especialidad, String fechaCita, String horaCita,\n                                       String motivo, byte[] pdfBytes, String tipoComprobante)",
+          "name": "enviarConfirmacionCita",
+          "returnType": "void",
+          "params": "String destinatario, String nombrePaciente, String nombreMedico,\n                                       String especialidad, String fechaCita, String horaCita,\n                                       String motivo, byte[] pdfBytes, String tipoComprobante"
+        }
+      ],
+      "dependencies": [
+        "JavaMailSender"
+      ]
+    },
+    {
+      "class": "EspecialidadService",
+      "path": "process\\service\\EspecialidadService.java",
+      "methods": [
+        {
+          "signature": "public void seed()",
+          "name": "seed",
+          "returnType": "void",
+          "params": ""
+        },
+        {
+          "signature": "public List<EspecialidadDto> getAll()",
+          "name": "getAll",
+          "returnType": "List<EspecialidadDto>",
+          "params": ""
+        },
+        {
+          "signature": "public EspecialidadDto getById(int id)",
+          "name": "getById",
+          "returnType": "EspecialidadDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public EspecialidadDto save(EspecialidadRequest especialidad)",
+          "name": "save",
+          "returnType": "EspecialidadDto",
+          "params": "EspecialidadRequest especialidad"
+        },
+        {
+          "signature": "public EspecialidadDto update(int id, EspecialidadRequest especialidad)",
+          "name": "update",
+          "returnType": "EspecialidadDto",
+          "params": "int id, EspecialidadRequest especialidad"
+        }
+      ],
+      "dependencies": [
+        "EspecialidadRepository"
+      ]
+    },
+    {
+      "class": "HistorialClinicoService",
+      "path": "process\\service\\HistorialClinicoService.java",
+      "methods": [
+        {
+          "signature": "public List<HistorialClinicoDto> getAll()",
+          "name": "getAll",
+          "returnType": "List<HistorialClinicoDto>",
+          "params": ""
+        },
+        {
+          "signature": "public HistorialClinicoDto getById(int id)",
+          "name": "getById",
+          "returnType": "HistorialClinicoDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public HistorialClinicoDto save(HistorialClinicoRequest historialClinico)",
+          "name": "save",
+          "returnType": "HistorialClinicoDto",
+          "params": "HistorialClinicoRequest historialClinico"
+        },
+        {
+          "signature": "public HistorialClinicoDto update(int id, HistorialClinicoRequest historialClinico)",
+          "name": "update",
+          "returnType": "HistorialClinicoDto",
+          "params": "int id, HistorialClinicoRequest historialClinico"
+        }
+      ],
+      "dependencies": [
+        "CitaRepository",
+        "HistorialClinicoRepository",
+        "PacienteRepository"
+      ]
+    },
+    {
+      "class": "HorarioService",
+      "path": "process\\service\\HorarioService.java",
+      "methods": [
+        {
+          "signature": "public List<HorarioDto> getByMedico(int idMedico)",
+          "name": "getByMedico",
+          "returnType": "List<HorarioDto>",
+          "params": "int idMedico"
+        },
+        {
+          "signature": "public List<HorarioDto> getDisponiblesByMedico(int idMedico)",
+          "name": "getDisponiblesByMedico",
+          "returnType": "List<HorarioDto>",
+          "params": "int idMedico"
+        },
+        {
+          "signature": "public List<HorarioDto> getHorariosBySemana(int idMedico, LocalDate inicio, LocalDate fin)",
+          "name": "getHorariosBySemana",
+          "returnType": "List<HorarioDto>",
+          "params": "int idMedico, LocalDate inicio, LocalDate fin"
+        },
+        {
+          "signature": "public void saveSemana(SemanaRequest request)",
+          "name": "saveSemana",
+          "returnType": "void",
+          "params": "SemanaRequest request"
+        }
+      ],
+      "dependencies": [
+        "HorarioRepository"
+      ]
+    },
+    {
+      "class": "IncidenteService",
+      "path": "process\\service\\IncidenteService.java",
+      "methods": [
+        {
+          "signature": "public List<IncidenteDto> getAll()",
+          "name": "getAll",
+          "returnType": "List<IncidenteDto>",
+          "params": ""
+        },
+        {
+          "signature": "public List<IncidenteDto> getByMedico(int idMedico)",
+          "name": "getByMedico",
+          "returnType": "List<IncidenteDto>",
+          "params": "int idMedico"
+        },
+        {
+          "signature": "public IncidenteDto getById(int id)",
+          "name": "getById",
+          "returnType": "IncidenteDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public IncidenteDto save(IncidenteRequest incidente)",
+          "name": "save",
+          "returnType": "IncidenteDto",
+          "params": "IncidenteRequest incidente"
+        },
+        {
+          "signature": "public IncidenteDto update(int id, IncidenteRequest incidente)",
+          "name": "update",
+          "returnType": "IncidenteDto",
+          "params": "int id, IncidenteRequest incidente"
+        },
+        {
+          "signature": "public IncidenteDto responder(int id, IncidenteRespuestaRequest request)",
+          "name": "responder",
+          "returnType": "IncidenteDto",
+          "params": "int id, IncidenteRespuestaRequest request"
+        }
+      ],
+      "dependencies": [
+        "IncidenteRepository",
+        "MedicoRepository"
+      ]
+    },
+    {
+      "class": "IpAutorizadaService",
+      "path": "process\\service\\IpAutorizadaService.java",
+      "methods": [
+        {
+          "signature": "public boolean isIpAuthorized(String ip)",
+          "name": "isIpAuthorized",
+          "returnType": "boolean",
+          "params": "String ip"
+        },
+        {
+          "signature": "public List<IpAutorizadaDto> getAll()",
+          "name": "getAll",
+          "returnType": "List<IpAutorizadaDto>",
+          "params": ""
+        },
+        {
+          "signature": "public IpAutorizadaDto getById(int id)",
+          "name": "getById",
+          "returnType": "IpAutorizadaDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public List<IpAutorizadaDto> getByUsuario(int idUsuario)",
+          "name": "getByUsuario",
+          "returnType": "List<IpAutorizadaDto>",
+          "params": "int idUsuario"
+        },
+        {
+          "signature": "public IpAutorizadaDto save(IpAutorizadaRequest request)",
+          "name": "save",
+          "returnType": "IpAutorizadaDto",
+          "params": "IpAutorizadaRequest request"
+        },
+        {
+          "signature": "public IpAutorizadaDto update(int id, IpAutorizadaRequest request)",
+          "name": "update",
+          "returnType": "IpAutorizadaDto",
+          "params": "int id, IpAutorizadaRequest request"
+        },
+        {
+          "signature": "public boolean delete(int id)",
+          "name": "delete",
+          "returnType": "boolean",
+          "params": "int id"
+        }
+      ],
+      "dependencies": [
+        "IpAutorizadaRepository"
+      ]
+    },
+    {
+      "class": "JwtService",
+      "path": "process\\service\\JwtService.java",
+      "methods": [
+        {
+          "signature": "public String generateToken(Usuario usuario)",
+          "name": "generateToken",
+          "returnType": "String",
+          "params": "Usuario usuario"
+        },
+        {
+          "signature": "public String generateAdminToken(Usuario usuario)",
+          "name": "generateAdminToken",
+          "returnType": "String",
+          "params": "Usuario usuario"
+        },
+        {
+          "signature": "public String extractEmail(String token)",
+          "name": "extractEmail",
+          "returnType": "String",
+          "params": "String token"
+        },
+        {
+          "signature": "public boolean validateToken(String token, String email)",
+          "name": "validateToken",
+          "returnType": "boolean",
+          "params": "String token, String email"
+        }
+      ],
+      "dependencies": [
+        "RolPermisoRepository",
+        "String",
+        "long"
+      ]
+    },
+    {
+      "class": "MedicoService",
+      "path": "process\\service\\MedicoService.java",
+      "methods": [
+        {
+          "signature": "public MedicoDto getByIdUsuario(int idUsuario)",
+          "name": "getByIdUsuario",
+          "returnType": "MedicoDto",
+          "params": "int idUsuario"
+        },
+        {
+          "signature": "public List<MedicoDto> getAll()",
+          "name": "getAll",
+          "returnType": "List<MedicoDto>",
+          "params": ""
+        },
+        {
+          "signature": "public MedicoDto getById(int id)",
+          "name": "getById",
+          "returnType": "MedicoDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public MedicoDto save(MedicoRequest medico)",
+          "name": "save",
+          "returnType": "MedicoDto",
+          "params": "MedicoRequest medico"
+        },
+        {
+          "signature": "public MedicoDto update(int id, MedicoRequest medico)",
+          "name": "update",
+          "returnType": "MedicoDto",
+          "params": "int id, MedicoRequest medico"
+        },
+        {
+          "signature": "public MedicoDto toggleStatus(int id)",
+          "name": "toggleStatus",
+          "returnType": "MedicoDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public boolean delete(int id)",
+          "name": "delete",
+          "returnType": "boolean",
+          "params": "int id"
+        },
+        {
+          "signature": "public List<MedicoDto> getByEspecialidad(String especialidad)",
+          "name": "getByEspecialidad",
+          "returnType": "List<MedicoDto>",
+          "params": "String especialidad"
+        }
+      ],
+      "dependencies": [
+        "EspecialidadRepository",
+        "MedicoRepository",
+        "UsuarioRepository"
+      ]
+    },
+    {
+      "class": "PacienteService",
+      "path": "process\\service\\PacienteService.java",
+      "methods": [
+        {
+          "signature": "public List<PacienteDto> getAll()",
+          "name": "getAll",
+          "returnType": "List<PacienteDto>",
+          "params": ""
+        },
+        {
+          "signature": "public List<PacienteDto> getByIdCliente(int idCliente)",
+          "name": "getByIdCliente",
+          "returnType": "List<PacienteDto>",
+          "params": "int idCliente"
+        },
+        {
+          "signature": "public PacienteDto getById(int id)",
+          "name": "getById",
+          "returnType": "PacienteDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public PacienteDto save(PacienteRequest paciente)",
+          "name": "save",
+          "returnType": "PacienteDto",
+          "params": "PacienteRequest paciente"
+        },
+        {
+          "signature": "public PacienteDto update(int id, PacienteRequest paciente)",
+          "name": "update",
+          "returnType": "PacienteDto",
+          "params": "int id, PacienteRequest paciente"
+        }
+      ],
+      "dependencies": [
+        "ClienteRepository",
+        "PacienteRepository",
+        "UsuarioRepository"
+      ]
+    },
+    {
+      "class": "PagoService",
+      "path": "process\\service\\PagoService.java",
+      "methods": [
+        {
+          "signature": "public List<PagoDto> listarPagos()",
+          "name": "listarPagos",
+          "returnType": "List<PagoDto>",
+          "params": ""
+        },
+        {
+          "signature": "public PagoDto guardarPago(PagoRequest pago)",
+          "name": "guardarPago",
+          "returnType": "PagoDto",
+          "params": "PagoRequest pago"
+        },
+        {
+          "signature": "public List<PagoDto> listarPagosPorCliente(int idCliente)",
+          "name": "listarPagosPorCliente",
+          "returnType": "List<PagoDto>",
+          "params": "int idCliente"
+        }
+      ],
+      "dependencies": [
+        "PagoRepository"
+      ]
+    },
+    {
+      "class": "PdfService",
+      "path": "process\\service\\PdfService.java",
+      "methods": [
+        {
+          "signature": "public byte[] generarComprobante(String tipoComprobante, String numeroDocumento,\n                                     String nombreRazonSocial, String nombrePaciente,\n                                     String nombreMedico, String especialidad,\n                                     String fechaCita, String horaCita, String metodoPago)",
+          "name": "generarComprobante",
+          "returnType": "byte[]",
+          "params": "String tipoComprobante, String numeroDocumento,\n                                     String nombreRazonSocial, String nombrePaciente,\n                                     String nombreMedico, String especialidad,\n                                     String fechaCita, String horaCita, String metodoPago"
+        }
+      ],
+      "dependencies": []
+    },
+    {
+      "class": "RefreshTokenService",
+      "path": "process\\service\\RefreshTokenService.java",
+      "methods": [
+        {
+          "signature": "public RefreshToken createRefreshToken(Integer userId, String fingerprint, String ipOrigen)",
+          "name": "createRefreshToken",
+          "returnType": "RefreshToken",
+          "params": "Integer userId, String fingerprint, String ipOrigen"
+        },
+        {
+          "signature": "public Optional<RefreshToken> findByToken(String token)",
+          "name": "findByToken",
+          "returnType": "Optional<RefreshToken>",
+          "params": "String token"
+        },
+        {
+          "signature": "public boolean isSessionValid(RefreshToken rt, String currentFingerprint, String currentIp)",
+          "name": "isSessionValid",
+          "returnType": "boolean",
+          "params": "RefreshToken rt, String currentFingerprint, String currentIp"
+        },
+        {
+          "signature": "public void revokeToken(String token)",
+          "name": "revokeToken",
+          "returnType": "void",
+          "params": "String token"
+        },
+        {
+          "signature": "public void revokeAllUserTokens(Integer userId)",
+          "name": "revokeAllUserTokens",
+          "returnType": "void",
+          "params": "Integer userId"
+        },
+        {
+          "signature": "public void purgeExpiredTokens()",
+          "name": "purgeExpiredTokens",
+          "returnType": "void",
+          "params": ""
+        }
+      ],
+      "dependencies": [
+        "RefreshTokenRepository",
+        "long"
+      ]
+    },
+    {
+      "class": "RolService",
+      "path": "process\\service\\RolService.java",
+      "methods": [
+        {
+          "signature": "public List<RolDto> getAll()",
+          "name": "getAll",
+          "returnType": "List<RolDto>",
+          "params": ""
+        },
+        {
+          "signature": "public RolDto getById(int id)",
+          "name": "getById",
+          "returnType": "RolDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public RolDto save(RolRequest rol)",
+          "name": "save",
+          "returnType": "RolDto",
+          "params": "RolRequest rol"
+        },
+        {
+          "signature": "public RolDto update(int id, RolRequest rol)",
+          "name": "update",
+          "returnType": "RolDto",
+          "params": "int id, RolRequest rol"
+        }
+      ],
+      "dependencies": [
+        "RolRepository"
+      ]
+    },
+    {
+      "class": "TarjetaGuardadaService",
+      "path": "process\\service\\TarjetaGuardadaService.java",
+      "methods": [
+        {
+          "signature": "public List<TarjetaGuardadaDto> listarPorUsuario(int idUsuario)",
+          "name": "listarPorUsuario",
+          "returnType": "List<TarjetaGuardadaDto>",
+          "params": "int idUsuario"
+        },
+        {
+          "signature": "public TarjetaGuardadaDto guardar(TarjetaGuardadaRequest request, int idUsuario)",
+          "name": "guardar",
+          "returnType": "TarjetaGuardadaDto",
+          "params": "TarjetaGuardadaRequest request, int idUsuario"
+        },
+        {
+          "signature": "public void eliminar(int idTarjeta, int idUsuario)",
+          "name": "eliminar",
+          "returnType": "void",
+          "params": "int idTarjeta, int idUsuario"
+        },
+        {
+          "signature": "public TarjetaGuardadaDto setPredeterminada(int idTarjeta, int idUsuario)",
+          "name": "setPredeterminada",
+          "returnType": "TarjetaGuardadaDto",
+          "params": "int idTarjeta, int idUsuario"
+        }
+      ],
+      "dependencies": [
+        "TarjetaGuardadaRepository"
+      ]
+    },
+    {
+      "class": "UsuarioService",
+      "path": "process\\service\\UsuarioService.java",
+      "methods": [
+        {
+          "signature": "public List<UsuarioDto> getAll()",
+          "name": "getAll",
+          "returnType": "List<UsuarioDto>",
+          "params": ""
+        },
+        {
+          "signature": "public UsuarioDto getById(int id)",
+          "name": "getById",
+          "returnType": "UsuarioDto",
+          "params": "int id"
+        },
+        {
+          "signature": "public UsuarioDto save(UsuarioRequest usuario)",
+          "name": "save",
+          "returnType": "UsuarioDto",
+          "params": "UsuarioRequest usuario"
+        },
+        {
+          "signature": "public UsuarioDto update(int id, UsuarioRequest usuario)",
+          "name": "update",
+          "returnType": "UsuarioDto",
+          "params": "int id, UsuarioRequest usuario"
+        },
+        {
+          "signature": "public UsuarioDto updateProfile(int id, UsuarioRequest usuario)",
+          "name": "updateProfile",
+          "returnType": "UsuarioDto",
+          "params": "int id, UsuarioRequest usuario"
+        },
+        {
+          "signature": "public boolean changePassword(int id, String currentPassword, String newPassword)",
+          "name": "changePassword",
+          "returnType": "boolean",
+          "params": "int id, String currentPassword, String newPassword"
+        },
+        {
+          "signature": "public Boolean delete(int id)",
+          "name": "delete",
+          "returnType": "Boolean",
+          "params": "int id"
+        }
+      ],
+      "dependencies": [
+        "PasswordEncoder",
+        "RolRepository",
+        "UsuarioRepository"
+      ]
+    }
+  ],
+  "controllers": [
+    {
+      "class": "SchemaController",
+      "path": "schema_db\\SchemaController.java",
+      "basePath": "/schema",
+      "endpoints": []
+    },
+    {
+      "class": "GlobalExceptionHandler",
+      "path": "utils\\exception\\GlobalExceptionHandler.java",
+      "basePath": "",
+      "endpoints": []
+    },
+    {
+      "class": "AdminAuthController",
+      "path": "expose\\web\\AdminAuthController.java",
+      "basePath": "/admin",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": "/discover"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/admin-hash/verify"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/auth/login"
+        }
+      ]
+    },
+    {
+      "class": "AdminController",
+      "path": "expose\\web\\AdminController.java",
+      "basePath": "/admin",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": "/ips"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/ips"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/ips/{id}"
+        },
+        {
+          "annotation": "DeleteMapping",
+          "path": "/ips/{id}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/auditoria"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/auditoria/{tipo}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/ping"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/roles"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/roles/{id}/permisos"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/roles/{id}/permisos"
+        },
+        {
+          "annotation": "DeleteMapping",
+          "path": "/roles/{id}/permisos/{idPermiso}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/permisos"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/usuarios"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/usuarios/{id}/rol"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/usuarios/{id}/status"
+        }
+      ]
+    },
+    {
+      "class": "AuthController",
+      "path": "expose\\web\\AuthController.java",
+      "basePath": "/auth",
+      "endpoints": [
+        {
+          "annotation": "PostMapping",
+          "path": "/login"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/verify-2fa"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/resend-2fa"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/refresh"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/logout"
+        }
+      ]
+    },
+    {
+      "class": "CitaController",
+      "path": "expose\\web\\CitaController.java",
+      "basePath": "/cita",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": "/all"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/getBy/{id}"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/save"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/update/{id}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/paciente/{id_paciente}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/cliente/{idCliente}"
+        },
+        {
+          "annotation": "PatchMapping",
+          "path": "/{id}/asistencia"
+        }
+      ]
+    },
+    {
+      "class": "ClienteController",
+      "path": "expose\\web\\ClienteController.java",
+      "basePath": "/cliente",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": ""
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/{id}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/usuario/{idUsuario}"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/save"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/actualizar/{id}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/nombre/{nombre}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/dni/{dni}"
+        }
+      ]
+    },
+    {
+      "class": "EspecialidadController",
+      "path": "expose\\web\\EspecialidadController.java",
+      "basePath": "/especialidad",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": "/all"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/getBy/{id}"
+        }
+      ]
+    },
+    {
+      "class": "HorarioController",
+      "path": "expose\\web\\HorarioController.java",
+      "basePath": "/horarios",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": "/medico/{idMedico}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/medico/{idMedico}/disponibles"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/medico/{idMedico}/semana"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/save-semana"
+        }
+      ]
+    },
+    {
+      "class": "IncidenteController",
+      "path": "expose\\web\\IncidenteController.java",
+      "basePath": "/incidente",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": "/all"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/getBy/{id}"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/save"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/update/{id}"
+        },
+        {
+          "annotation": "PatchMapping",
+          "path": "/responder/{id}"
+        }
+      ]
+    },
+    {
+      "class": "IpAutorizadaController",
+      "path": "expose\\web\\IpAutorizadaController.java",
+      "basePath": "/ip-autorizada",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": "/{id}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/usuario/{idUsuario}"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/{id}"
+        },
+        {
+          "annotation": "DeleteMapping",
+          "path": "/{id}"
+        }
+      ]
+    },
+    {
+      "class": "MedicoController",
+      "path": "expose\\web\\MedicoController.java",
+      "basePath": "/medico",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": "/all"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/getBy/{id}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/usuario/{idUsuario}"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/save"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/saveWithUser"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/update/{id}"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/toggle-status/{id}"
+        },
+        {
+          "annotation": "DeleteMapping",
+          "path": "/delete/{id}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/especialidad/{especialidad}"
+        }
+      ]
+    },
+    {
+      "class": "PacienteController",
+      "path": "expose\\web\\PacienteController.java",
+      "basePath": "/paciente",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": "/all"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/cliente/{idCliente}"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/getBy/{id}"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/save"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/update/{id}"
+        }
+      ]
+    },
+    {
+      "class": "PagoController",
+      "path": "expose\\web\\PagoController.java",
+      "basePath": "/pago",
+      "endpoints": [
+        {
+          "annotation": "PostMapping",
+          "path": "/save"
+        }
+      ]
+    },
+    {
+      "class": "TarjetaGuardadaController",
+      "path": "expose\\web\\TarjetaGuardadaController.java",
+      "basePath": "/tarjeta",
+      "endpoints": [
+        {
+          "annotation": "PostMapping",
+          "path": "/save"
+        },
+        {
+          "annotation": "DeleteMapping",
+          "path": "/delete/{id}"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/{id}/predeterminada"
+        }
+      ]
+    },
+    {
+      "class": "UsuarioController",
+      "path": "expose\\web\\UsuarioController.java",
+      "basePath": "/usuario",
+      "endpoints": [
+        {
+          "annotation": "GetMapping",
+          "path": "/all"
+        },
+        {
+          "annotation": "GetMapping",
+          "path": "/getBy/{id}"
+        },
+        {
+          "annotation": "PostMapping",
+          "path": "/save"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/update/{id}"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/profile"
+        },
+        {
+          "annotation": "PutMapping",
+          "path": "/password/{id}"
+        },
+        {
+          "annotation": "DeleteMapping",
+          "path": "/delete/{id}"
+        }
+      ]
+    }
+  ],
+  "repositories": [
+    {
+      "class": "AdminConfigRepository",
+      "path": "process\\repository\\AdminConfigRepository.java",
+      "definition": "public interface AdminConfigRepository extends JpaRepository<AdminConfig, Integer> {"
+    },
+    {
+      "class": "CitaRepository",
+      "path": "process\\repository\\CitaRepository.java",
+      "definition": "public interface CitaRepository extends JpaRepository<Cita, Integer> {"
+    },
+    {
+      "class": "ClienteRepository",
+      "path": "process\\repository\\ClienteRepository.java",
+      "definition": "public interface ClienteRepository extends JpaRepository<Cliente, Integer> {"
+    },
+    {
+      "class": "EspecialidadRepository",
+      "path": "process\\repository\\EspecialidadRepository.java",
+      "definition": "public interface EspecialidadRepository extends JpaRepository<Especialidad, Integer> {"
+    },
+    {
+      "class": "HistorialClinicoRepository",
+      "path": "process\\repository\\HistorialClinicoRepository.java",
+      "definition": "public interface HistorialClinicoRepository extends JpaRepository<HistorialClinico, Integer> {"
+    },
+    {
+      "class": "HorarioRepository",
+      "path": "process\\repository\\HorarioRepository.java",
+      "definition": "public interface HorarioRepository extends JpaRepository<Horario, Integer> {"
+    },
+    {
+      "class": "IncidenteRepository",
+      "path": "process\\repository\\IncidenteRepository.java",
+      "definition": "public interface IncidenteRepository extends JpaRepository<Incidente, Integer> {"
+    },
+    {
+      "class": "IntentoLoginRepository",
+      "path": "process\\repository\\IntentoLoginRepository.java",
+      "definition": "public interface IntentoLoginRepository extends JpaRepository<IntentoLogin, Integer> {"
+    },
+    {
+      "class": "IpAutorizadaRepository",
+      "path": "process\\repository\\IpAutorizadaRepository.java",
+      "definition": "public interface IpAutorizadaRepository extends JpaRepository<IpAutorizada, Integer> {"
+    },
+    {
+      "class": "MedicoRepository",
+      "path": "process\\repository\\MedicoRepository.java",
+      "definition": "public interface MedicoRepository extends JpaRepository<Medico, Integer> {"
+    },
+    {
+      "class": "PacienteRepository",
+      "path": "process\\repository\\PacienteRepository.java",
+      "definition": "public interface PacienteRepository extends JpaRepository<Paciente, Integer> {"
+    },
+    {
+      "class": "PagoRepository",
+      "path": "process\\repository\\PagoRepository.java",
+      "definition": "public interface PagoRepository extends JpaRepository<Pago, Integer> {"
+    },
+    {
+      "class": "PermisoRepository",
+      "path": "process\\repository\\PermisoRepository.java",
+      "definition": "public interface PermisoRepository extends JpaRepository<Permiso, Integer> {"
+    },
+    {
+      "class": "RefreshTokenRepository",
+      "path": "process\\repository\\RefreshTokenRepository.java",
+      "definition": "public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long> {"
+    },
+    {
+      "class": "RolPermisoRepository",
+      "path": "process\\repository\\RolPermisoRepository.java",
+      "definition": "public interface RolPermisoRepository extends JpaRepository<RolPermiso, Integer> {"
+    },
+    {
+      "class": "RolRepository",
+      "path": "process\\repository\\RolRepository.java",
+      "definition": "public interface RolRepository extends JpaRepository<Rol, Integer> {"
+    },
+    {
+      "class": "TarjetaGuardadaRepository",
+      "path": "process\\repository\\TarjetaGuardadaRepository.java",
+      "definition": "public interface TarjetaGuardadaRepository extends JpaRepository<TarjetaGuardada, Integer> {"
+    },
+    {
+      "class": "UsuarioRepository",
+      "path": "process\\repository\\UsuarioRepository.java",
+      "definition": "public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {"
+    }
+  ],
+  "entities": [
+    {
+      "class": "AdminConfig",
+      "path": "process\\domain\\AdminConfig.java",
+      "table": "admin_config",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "idAdminConfig"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "clave"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "valor"
+        }
+      ]
+    },
+    {
+      "class": "Cita",
+      "path": "process\\domain\\Cita.java",
+      "table": "cita",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_cita"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "motivo"
+        },
+        {
+          "visibility": "private",
+          "type": "Date",
+          "name": "fecha_registro"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "estado"
+        },
+        {
+          "visibility": "private",
+          "type": "Character",
+          "name": "asistencia"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "comentarios"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_horario"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_medico"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_paciente"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDate",
+          "name": "fecha_cita"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "hora_cita"
+        },
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "id_pago"
+        }
+      ]
+    },
+    {
+      "class": "Cliente",
+      "path": "process\\domain\\Cliente.java",
+      "table": "cliente",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_cliente"
+        },
+        {
+          "visibility": "private",
+          "type": "Usuario",
+          "name": "usuario"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "dni_responsable"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "direccion"
+        }
+      ]
+    },
+    {
+      "class": "Especialidad",
+      "path": "process\\domain\\Especialidad.java",
+      "table": "especialidad",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_especialidad"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "nombre"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "descripcion"
+        },
+        {
+          "visibility": "private",
+          "type": "Double",
+          "name": "precio"
+        }
+      ]
+    },
+    {
+      "class": "HistorialClinico",
+      "path": "process\\domain\\HistorialClinico.java",
+      "table": "historial_clinico",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_historial_clinico"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "diagnostico"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "tratamiento"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "observaciones"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDate",
+          "name": "fecha_registro"
+        },
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "id_cita"
+        },
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "id_paciente"
+        }
+      ]
+    },
+    {
+      "class": "Horario",
+      "path": "process\\domain\\Horario.java",
+      "table": "horario",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "id_horario"
+        },
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "medico_id"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDate",
+          "name": "fecha"
+        },
+        {
+          "visibility": "private",
+          "type": "Time",
+          "name": "hora_inicio"
+        },
+        {
+          "visibility": "private",
+          "type": "Time",
+          "name": "hora_fin"
+        },
+        {
+          "visibility": "private",
+          "type": "char",
+          "name": "disponible"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_medico"
+        }
+      ]
+    },
+    {
+      "class": "Incidente",
+      "path": "process\\domain\\Incidente.java",
+      "table": "incidente",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_incidente"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "tipo_incidente"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "descripcion"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "respuesta_admin"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDateTime",
+          "name": "fecha_registro"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_medico"
+        }
+      ]
+    },
+    {
+      "class": "IntentoLogin",
+      "path": "process\\domain\\IntentoLogin.java",
+      "table": "intento_login",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "idIntento"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "email"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "ipOrigen"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDateTime",
+          "name": "fechaIntento"
+        },
+        {
+          "visibility": "private",
+          "type": "Boolean",
+          "name": "exitoso"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "tipo"
+        }
+      ]
+    },
+    {
+      "class": "IpAutorizada",
+      "path": "process\\domain\\IpAutorizada.java",
+      "table": "ip_autorizada",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "idIpAutorizada"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "ip"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "descripcion"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "visible"
+        },
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "idUsuario"
+        },
+        {
+          "visibility": "private",
+          "type": "Boolean",
+          "name": "activo"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDateTime",
+          "name": "fechaRegistro"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDateTime",
+          "name": "fechaModificado"
+        }
+      ]
+    },
+    {
+      "class": "Medico",
+      "path": "process\\domain\\Medico.java",
+      "table": "medico",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_medico"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "nro_colegiatura"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "url_foto"
+        },
+        {
+          "visibility": "private",
+          "type": "Genero",
+          "name": "genero"
+        },
+        {
+          "visibility": "private",
+          "type": "EstadoMedico",
+          "name": "estado"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_usuario"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_especialidad"
+        },
+        {
+          "visibility": "private",
+          "type": "Character",
+          "name": "activo"
+        }
+      ]
+    },
+    {
+      "class": "Paciente",
+      "path": "process\\domain\\Paciente.java",
+      "table": "paciente",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_paciente"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "nombre_completo"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "dni_menor"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDate",
+          "name": "fecha_nacimiento"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_cliente"
+        }
+      ]
+    },
+    {
+      "class": "Pago",
+      "path": "process\\domain\\Pago.java",
+      "table": "pago",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_pago"
+        },
+        {
+          "visibility": "private",
+          "type": "double",
+          "name": "monto"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "metodo_pago"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "estado_transaccion"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDateTime",
+          "name": "fecha_pago"
+        },
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "id_cita"
+        }
+      ]
+    },
+    {
+      "class": "Permiso",
+      "path": "process\\domain\\Permiso.java",
+      "table": "permiso",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "idPermiso"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "codigo"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "nombre"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "descripcion"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "recurso"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "accion"
+        }
+      ]
+    },
+    {
+      "class": "RefreshToken",
+      "path": "process\\domain\\RefreshToken.java",
+      "table": "refresh_token",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "Long",
+          "name": "id"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "token"
+        },
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "idUsuario"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDateTime",
+          "name": "expiryDate"
+        },
+        {
+          "visibility": "private",
+          "type": "boolean",
+          "name": "revoked"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "fingerprint"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "ipOrigen"
+        }
+      ]
+    },
+    {
+      "class": "Rol",
+      "path": "process\\domain\\Rol.java",
+      "table": "rol",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_rol"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "nombre_rol"
+        }
+      ]
+    },
+    {
+      "class": "RolPermiso",
+      "path": "process\\domain\\RolPermiso.java",
+      "table": "rol_permiso",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "idRolPermiso"
+        },
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "idRol"
+        },
+        {
+          "visibility": "private",
+          "type": "Integer",
+          "name": "idPermiso"
+        }
+      ]
+    },
+    {
+      "class": "TarjetaGuardada",
+      "path": "process\\domain\\TarjetaGuardada.java",
+      "table": "tarjeta_guardada",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_tarjeta"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_usuario"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "alias"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "ultimos_digitos"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "marca"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "nombre_titular"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "mes_vencimiento"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "anio_vencimiento"
+        },
+        {
+          "visibility": "private",
+          "type": "boolean",
+          "name": "es_predeterminada"
+        },
+        {
+          "visibility": "private",
+          "type": "boolean",
+          "name": "activo"
+        },
+        {
+          "visibility": "private",
+          "type": "LocalDateTime",
+          "name": "fecha_creacion"
+        }
+      ]
+    },
+    {
+      "class": "Usuario",
+      "path": "process\\domain\\Usuario.java",
+      "table": "usuario",
+      "fields": [
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_usuario"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "id_rol"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "nombres"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "apellidos"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "email"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "password"
+        },
+        {
+          "visibility": "private",
+          "type": "int",
+          "name": "telefono"
+        },
+        {
+          "visibility": "private",
+          "type": "Date",
+          "name": "fecha_registro"
+        },
+        {
+          "visibility": "private",
+          "type": "Date",
+          "name": "fecha_modificado"
+        },
+        {
+          "visibility": "private",
+          "type": "Boolean",
+          "name": "activo"
+        },
+        {
+          "visibility": "private",
+          "type": "char",
+          "name": "visible"
+        },
+        {
+          "visibility": "private",
+          "type": "String",
+          "name": "codigoVerificacion"
+        },
+        {
+          "visibility": "private",
+          "type": "Date",
+          "name": "codigoExpiracion"
+        }
+      ]
+    }
+  ]
+}
