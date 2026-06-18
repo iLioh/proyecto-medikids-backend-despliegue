@@ -5,7 +5,6 @@ import com.medikids.medikids.expose.model.request.BiometriaVerifyRequest;
 import com.medikids.medikids.expose.model.response.AuthResponse;
 import com.medikids.medikids.process.service.AdminConfigService;
 import com.medikids.medikids.process.service.AuthService;
-import com.medikids.medikids.process.service.IpAutorizadaService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,18 +24,11 @@ public class AdminAuthController {
     @Autowired
     private AdminConfigService adminConfigService;
 
-    @Autowired
-    private IpAutorizadaService ipAutorizadaService;
-
     /**
-     * Endpoint de descubrimiento: devuelve el hash secreto solo si la IP está autorizada.
+     * Endpoint de descubrimiento: devuelve el hash secreto.
      */
     @GetMapping("/discover")
-    public ResponseEntity<Map<String, String>> discover(HttpServletRequest request) {
-        String clientIp = getClientIp(request);
-        if (!ipAutorizadaService.isIpAuthorized(clientIp)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+    public ResponseEntity<Map<String, String>> discover() {
         String hash = adminConfigService.getSecretPath();
         if (hash == null) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -48,12 +40,7 @@ public class AdminAuthController {
      * Verifica que un hash sea válido (coincida con el almacenado en BD).
      */
     @PostMapping("/admin-hash/verify")
-    public ResponseEntity<Void> verifyHash(@RequestBody Map<String, String> body,
-                                           HttpServletRequest request) {
-        String clientIp = getClientIp(request);
-        if (!ipAutorizadaService.isIpAuthorized(clientIp)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+    public ResponseEntity<Void> verifyHash(@RequestBody Map<String, String> body) {
         String hash = body.get("hash");
         if (hash == null || !adminConfigService.validateHash(hash)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

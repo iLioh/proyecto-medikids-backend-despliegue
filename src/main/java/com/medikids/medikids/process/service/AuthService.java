@@ -3,7 +3,6 @@ package com.medikids.medikids.process.service;
 import com.medikids.medikids.expose.model.response.AuthResponse;
 import com.medikids.medikids.process.domain.RefreshToken;
 import com.medikids.medikids.process.domain.Usuario;
-import com.medikids.medikids.process.service.IpAutorizadaService;
 import com.medikids.medikids.process.domain.PasswordResetToken;
 import com.medikids.medikids.process.repository.PasswordResetTokenRepository;
 import com.medikids.medikids.process.repository.UsuarioRepository;
@@ -42,9 +41,6 @@ public class AuthService {
 
     @Autowired
     private JwtService jwtService;
-
-    @Autowired
-    private IpAutorizadaService ipAutorizadaService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -240,10 +236,6 @@ public class AuthService {
         }
 
         if (!passwordEncoder.matches(password, usuario.getPassword())) {
-            return null;
-        }
-
-        if (!ipAutorizadaService.isIpAuthorized(clientIp)) {
             return null;
         }
 

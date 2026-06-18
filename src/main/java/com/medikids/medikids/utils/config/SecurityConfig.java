@@ -27,9 +27,6 @@ public class SecurityConfig {
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Autowired
-    private IpAuthorizationFilter ipAuthorizationFilter;
-
-    @Autowired
     private RateLimitingFilter rateLimitingFilter;
 
     @Bean
@@ -49,7 +46,6 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(ipAuthorizationFilter, JwtAuthenticationFilter.class)
                 .addFilterBefore(rateLimitingFilter, JwtAuthenticationFilter.class);
 
         return http.build();
